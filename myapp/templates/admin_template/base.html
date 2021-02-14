@@ -1,0 +1,75 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <!-- ChartJS -->
+ <script src="{% static 'dealer/plugins/chart.js/Chart.min.js' %}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+    <title>Bus Reservation || Admin Panel</title>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark">
+        <h2 class="text-white">Hi {{ user.username}}</h2>
+        <button class="btn btn-primary bg-danger justify-content-end" id="menu-toggle"><a href="{% url 'admin_logout' %}" class="text-white">Logout</a></button>
+    </nav>
+    <div class="d-md-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right col-md-2" id="sidebar-wrapper">
+          <div class="list-group list-group-flush bg-light">
+            <!-- {% url 'admin_home' as admin_home %}
+            <a href="{% url 'admin_home' %}" class="list-group-item list-group-item-action bg-light {% if request.path == admin_home %} active {% endif %}">Home</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Dealers</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Customers</a> -->
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+                   with font-awesome or any other icon font library -->
+                   <li class="nav-item">
+                    {% url 'admin_home' as admin_home %}
+                    <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+                      <i class="nav-icon fas fa-home"></i>
+                      <p>
+                        Buses
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    {% url 'add_bus' as add_bus %}
+                    <a href="{{ add_bus }}" class="nav-link {% if request.path == add_bus %} active {% endif %} ">
+                      <i class="nav-icon fas fa-home"></i>
+                      <p>
+                        Add Bus
+                      </p>
+                    </a>
+                  </li>
+                  
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-10" id="page-content-wrapper">
+          {% block custom_css %}
+          {% endblock custom_css %}
+
+
+          {%block content%}
+          {%endblock%}
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  {% block custom_js %}
+{% endblock custom_js %}
+    
+  </body>
+</html>

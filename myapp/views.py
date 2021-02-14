@@ -8,7 +8,11 @@ from decimal import Decimal
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'myapp/base.html')
+        bus= Bus.objects.all()
+        context ={
+            "buses":bus
+        }
+        return render(request, 'myapp/bus_list.html',context)
     else:
         return render(request, 'users/login.html')
 
