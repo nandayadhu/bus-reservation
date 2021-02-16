@@ -6,9 +6,9 @@
     <a class="btn btn-primary" href="{% url 'add_bus' %}" role="button">+ Add Bus</a> <br/>&nbsp;
       <div class="row">
           <div class="col-12">
-            <div class="card">
+            <!-- <div class="card"> -->
               <div class="card-header">
-                <h3 class="card-title">Bus Details</h3>
+                <h3 class="card-title" >Bus Details</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -19,8 +19,8 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+              <!-- <div class="card-body table-responsive p-0"> -->
+                <table class="table table-striped" style="color: red;">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -51,9 +51,9 @@
                   {% endfor %}
                   </tbody>
                 </table>
-              </div>
+              <!-- </div> -->
               <!-- /.card-body -->
-            </div>
+            <!-- </div> -->
             <!-- /.card -->
           </div>
         </div>

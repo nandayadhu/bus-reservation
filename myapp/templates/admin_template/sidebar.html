@@ -1,0 +1,30 @@
+
+
+<div class="bg-light border-right col-md-2" id="sidebar-wrapper">
+    <div class="list-group list-group-flush bg-light">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+             <li class="nav-item">
+              {% url 'admin_home' as admin_home %}
+              <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Buses
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              {% url 'add_bus' as add_bus %}
+              <a href="{{ add_bus }}" class="nav-link {% if request.path == add_bus %} active {% endif %} ">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Add Bus
+                </p>
+              </a>
+            </li>
+            
+      </ul>
+    </div>
+  </div>
+
