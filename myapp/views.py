@@ -42,33 +42,38 @@ def bookings(request):
     context = {}
     if request.method == 'POST':
         id_r = request.POST.get('bus_id')
-        seats_r = int(request.POST.get('no_seats'))
+        # seats_r = int(request.POST.get('no_seats'))
+        seat = request.POST.getlist('check')
+        print(seat)
+        show = request.POST.get('show')
+
         bus = Bus.objects.get(id=id_r)
         if bus:
-            if bus.rem > int(seats_r):
-                name_r = bus.bus_name
-                cost = int(seats_r) * bus.price
-                source_r = bus.source
-                dest_r = bus.dest
-                nos_r = Decimal(bus.nos)
-                price_r = bus.price
-                date_r = bus.date
-                time_r = bus.time
-                username_r = request.user.username
-                email_r = request.user.email
-                userid_r = request.user.id
-                rem_r = bus.rem - seats_r
-                Bus.objects.filter(id=id_r).update(rem=rem_r)
-                book = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
-                                           source=source_r, busid=id_r,
-                                           dest=dest_r, price=price_r, nos=seats_r, date=date_r, time=time_r,
-                                           status='BOOKED')
-                print('------------book id-----------', book.id)
-                # book.save()
-                return render(request, 'myapp/bookings.html', locals())
-            else:
-                context["error"] = "Sorry select fewer number of seats"
-                return render(request, 'myapp/findbus.html', context)
+            # if bus.rem > int(seat):
+            # name_r = bus.bus_name
+            # cost = seat * bus.price
+            # source_r = bus.source
+            # dest_r = bus.dest
+            # nos_r = Decimal(bus.nos)
+            # price_r = bus.price
+            date_r = bus.date
+            time_r = bus.time
+            # username_r = request.user.username
+            # email_r = request.user.email
+            # userid_r = request.user.id
+            # rem_r = bus.rem - seats_r
+            Bus.objects.filter(id=id_r).update(rem=rem_r)
+            # book = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
+            #                             source=source_r, busid=id_r,
+            #                             dest=dest_r, price=price_r, useat=seats, date=date_r, time=time_r,
+            #                             status='BOOKED')
+            # book = Book.objects.create(useat=seat,price=cost,status='BOOKED')
+            print('------------book id-----------', book.id)
+            # book.save()
+            return render(request, 'myapp/bookings.html', locals())
+            # else:
+            #     context["error"] = "Sorry select fewer number of seats"
+            #     return render(request, 'myapp/findbus.html', context)
 
     else:
         return render(request, 'myapp/findbus.html')
