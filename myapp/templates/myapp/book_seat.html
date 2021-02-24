@@ -3,7 +3,11 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static "css/seat.css" %}">
-
+<!-- <style>
+  .hall__screen {
+    background-image: url("/bus-reservation/myapp/static/img/bus2.jpg");
+  }
+  </style> -->
 <div class="content-section">
     <form action="{% url 'bookings' %}" method="post" id="book">
         {% csrf_token %}

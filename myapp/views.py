@@ -39,7 +39,7 @@ def findbus(request):
 @login_required(login_url='login')
 def book_seat(request,id):
     bus = Bus.objects.get(id=id)
-    seat = Book.objects.filter(busid=id)
+    seat = Book.objects.filter(busid=id,status="BOOKED")
     print(seat)
     context = {
         "bus":bus,
@@ -82,7 +82,6 @@ def bookings(request):
                                         source=source_r, busid=bus,
                                         dest=dest_r, price=price_r, useat=seats, date=date_r, time=time_r,
                                         status='BOOKED')
-            # book = Book.objects.create(useat=seat,price=cost,status='BOOKED')
             print('------------book id-----------', book.id)
             # book.save()
             return render(request, 'myapp/bookings.html', locals())

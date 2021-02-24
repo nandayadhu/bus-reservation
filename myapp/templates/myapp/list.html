@@ -3,8 +3,9 @@
 {% block content %}
 {% load static %}
 
-<link rel="stylesheet" href="{% static "css/seat.css" %}">
+<!-- <link rel="stylesheet" href="{% static "css/seat.css" %}"> -->
 
+</style>
 <h3>{{msg}}</h3>
 <h2>List of buses</h2>
 <table class="table table-striped" >
@@ -24,14 +25,14 @@
     {% for row in bus_list %}
     <tr>
         <td><a href="{% url 'book_seat' row.id %}">{{row.id }}</a></td>
-        <td><a href="">{{row.bus_name}}</a></td>
-        <td><a href="">{{row.source}}</a></td>
-        <td><a href="">{{row.dest}}</a></td>
-        <td><a href="">{{row.nos}}</a></td>
-        <td><a href="">{{row.rem}}</a></td>
-        <td><a href="">{{row.price}}</a></td>
-        <td><a href="">{{row.date}}</a></td>
-        <td><a href="">{{row.time}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.bus_name}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.source}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.dest}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.nos}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.rem}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.price}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.date}}</a></td>
+        <td><a href="{% url 'book_seat' row.id %}">{{row.time}}</a></td>
 
       </a>
     </tr>
