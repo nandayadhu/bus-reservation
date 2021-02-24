@@ -36,6 +36,17 @@ def findbus(request):
     else:
         return render(request, 'myapp/findbus.html')
 
+@login_required(login_url='login')
+def book_seat(request,id):
+    bus = Bus.objects.get(id=id)
+    seat = Book.objects.filter(busid=id)
+    print(seat)
+    context = {
+        "bus":bus,
+        "seat":seat
+    }
+    return render(request,"myapp/book_seat.html",context)
+
 
 @login_required(login_url='login')
 def bookings(request):
@@ -43,30 +54,34 @@ def bookings(request):
     if request.method == 'POST':
         id_r = request.POST.get('bus_id')
         # seats_r = int(request.POST.get('no_seats'))
-        seat = request.POST.getlist('check')
-        print(seat)
+        seats = ','.join(request.POST.getlist('check'))
+        print(seats)
+        seat=seats.count("#")
+        print("seat",seat)
         show = request.POST.get('show')
 
         bus = Bus.objects.get(id=id_r)
         if bus:
             # if bus.rem > int(seat):
-            # name_r = bus.bus_name
-            # cost = seat * bus.price
-            # source_r = bus.source
-            # dest_r = bus.dest
+            name_r = bus.bus_name
+            cost = seat * bus.price
+            print("price",bus.price)
+            print(cost)
+            source_r = bus.source
+            dest_r = bus.dest
             # nos_r = Decimal(bus.nos)
-            # price_r = bus.price
+            price_r = bus.price
             date_r = bus.date
             time_r = bus.time
-            # username_r = request.user.username
-            # email_r = request.user.email
-            # userid_r = request.user.id
+            username_r = request.user.username
+            email_r = request.user.email
+            userid_r = request.user.id
             # rem_r = bus.rem - seats_r
-            Bus.objects.filter(id=id_r).update(rem=rem_r)
-            # book = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
-            #                             source=source_r, busid=id_r,
-            #                             dest=dest_r, price=price_r, useat=seats, date=date_r, time=time_r,
-            #                             status='BOOKED')
+            # Bus.objects.filter(id=id_r).update(rem=rem_r)
+            book = Book.objects.create(name=username_r, email=email_r, userid=userid_r, bus_name=name_r,
+                                        source=source_r, busid=bus,
+                                        dest=dest_r, price=price_r, useat=seats, date=date_r, time=time_r,
+                                        status='BOOKED')
             # book = Book.objects.create(useat=seat,price=cost,status='BOOKED')
             print('------------book id-----------', book.id)
             # book.save()
@@ -88,12 +103,13 @@ def cancellings(request):
 
         try:
             book = Book.objects.get(id=id_r)
-            bus = Bus.objects.get(id=book.busid)
-            rem_r = bus.rem + book.nos
-            Bus.objects.filter(id=book.busid).update(rem=rem_r)
+            print(book)
+            bus = Bus.objects.get(id=book.busid.id)
+            # rem_r = bus.rem + book.nos
+            # Bus.objects.filter(id=book.busid)
             #nos_r = book.nos - seats_r
             Book.objects.filter(id=id_r).update(status='CANCELLED')
-            Book.objects.filter(id=id_r).update(nos=0)
+            # Book.objects.filter(id=id_r)
             return redirect(seebookings)
         except Book.DoesNotExist:
             context["error"] = "Sorry You have not booked that bus"

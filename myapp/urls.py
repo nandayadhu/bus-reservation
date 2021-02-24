@@ -16,6 +16,8 @@ urlpatterns = [
     path('admin_home', md_views.admin_home, name="admin_home"),
     path('add_bus', md_views.add_bus, name="add_bus"),
     path('admin_logout', md_views.admin_logout, name="admin_logout"),
+    path('book_seat/<str:id>', views.book_seat, name="book_seat"),
+
 
     
 
